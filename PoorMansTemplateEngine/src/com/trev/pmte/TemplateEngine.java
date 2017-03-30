@@ -23,13 +23,18 @@ public class TemplateEngine {
 	private void replacePatterns(final StringBuilder builder, TemplateDefinition def) {
 		Matcher matcher = def.getPattern().matcher(builder);
 		while (matcher.find()) {
-			String target = new String(def.getTarget());
-			List<String> params = def.getParams();
-			for (int i = 0, size = params.size(); i < size; i++) {
-				target = target.replace("${" + params.get(i) + "}", matcher.group(i + 1));
-			}
+			String target = createTemplateTarget(def, matcher);
 			builder.replace(matcher.start(), matcher.end(), target);
 		}
+	}
+
+	private String createTemplateTarget(TemplateDefinition def, Matcher matcher) {
+		String target = new String(def.getTarget());
+		List<String> params = def.getParams();
+		for (int i = 0, size = params.size(); i < size; i++) {
+			target = target.replace("${" + params.get(i) + "}", matcher.group(i + 1));
+		}
+		return target;
 	}
 
 }

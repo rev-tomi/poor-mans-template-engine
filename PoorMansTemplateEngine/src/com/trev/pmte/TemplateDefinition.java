@@ -4,7 +4,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.regex.Pattern;
 
-public class TemplateDefinition {
+class TemplateDefinition {
 
 	private final Pattern pattern;
 	private final String target;
