@@ -64,4 +64,17 @@ public class ParameterlessTemplateTest {
 		// THEN
 		assertEquals(target, "asdf\n<TemplateTarget>\nghij\n<TemplateTarget>\nasdf<OtherTemplateTarget>");
 	}
+
+	@Test
+	public void testLongTemplates() {
+		// GIVEN
+		String src = "${OtherTemplateCall}\nasdf\n${OtherTemplateCall}\nghij\n${TemplateCall}\nasdf";
+		
+		// WHEN
+		engine.addTemplate("OtherTemplateCall", "<OtherTemplateTarget 123456789 123456789 123456789 123456789>");
+		String target = engine.applyTemplates(src);
+		
+		// THEN
+		assertEquals(target, "<OtherTemplateTarget 123456789 123456789 123456789 123456789>\nasdf\n<OtherTemplateTarget 123456789 123456789 123456789 123456789>\nghij\n<TemplateTarget>\nasdf");
+	}
 }

@@ -25,6 +25,7 @@ public class TemplateEngine {
 		while (matcher.find()) {
 			String target = createTemplateTarget(def, matcher);
 			builder.replace(matcher.start(), matcher.end(), target);
+			matcher.region(matcher.regionStart() + target.length(), builder.length());
 		}
 	}
 
