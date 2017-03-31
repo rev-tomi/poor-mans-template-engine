@@ -1,4 +1,4 @@
-# poor-mans-template-engine
+# Poor Man's Template Engine
 A minimalist template engine that you can copy with few keytrokes
 
 Sometimes you can't just download a library from the internet. Sometimes company policy won't let you use builtin template engines like XSLT. In this case you need to roll your own.
