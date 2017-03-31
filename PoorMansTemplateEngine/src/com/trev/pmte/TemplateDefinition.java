@@ -19,7 +19,7 @@ class TemplateDefinition {
 	Pattern createPattern(String pattern, int paramsLength) {
 		StringBuilder patternSrc = new StringBuilder("\\$\\{" + pattern);
 		for (int i = 0; i < paramsLength; i++) {
-			patternSrc.append("\\s+'([^']*)'");
+			patternSrc.append("\\s+'((?>[^']+|'')*)'");
 		}
 		patternSrc.append("\\}");
 		return Pattern.compile(patternSrc.toString());

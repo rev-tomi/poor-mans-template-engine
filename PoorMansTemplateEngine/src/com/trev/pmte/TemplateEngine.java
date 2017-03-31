@@ -33,7 +33,7 @@ public class TemplateEngine {
 		String target = new String(def.getTarget());
 		List<String> params = def.getParams();
 		for (int i = 0, size = params.size(); i < size; i++) {
-			target = target.replace("${" + params.get(i) + "}", matcher.group(i + 1));
+			target = target.replace("${" + params.get(i) + "}", matcher.group(i + 1).replace("''", "'"));
 		}
 		return target;
 	}
