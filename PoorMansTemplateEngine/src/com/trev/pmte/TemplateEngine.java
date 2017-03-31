@@ -32,8 +32,11 @@ public class TemplateEngine {
 	private String createTemplateTarget(TemplateDefinition def, Matcher matcher) {
 		String target = new String(def.getTarget());
 		List<String> params = def.getParams();
-		for (int i = 0, size = params.size(); i < size; i++) {
-			target = target.replace("${" + params.get(i) + "}", matcher.group(i + 1).replace("''", "'"));
+		for (int paramNum = 0, size = params.size(); paramNum < size; paramNum++) {
+			int apostrophGroupNum = 2 * paramNum + 1;
+			boolean isApostrophGroup = matcher.group(apostrophGroupNum) != null;
+			int groupNum = isApostrophGroup ? apostrophGroupNum : apostrophGroupNum + 1;
+			target = target.replace("${" + params.get(paramNum) + "}", matcher.group(groupNum).replace("''", "'"));
 		}
 		return target;
 	}
