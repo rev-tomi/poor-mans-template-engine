@@ -36,7 +36,8 @@ public class TemplateEngine {
 			int apostrophGroupNum = 2 * paramNum + 1;
 			boolean isApostrophGroup = matcher.group(apostrophGroupNum) != null;
 			int groupNum = isApostrophGroup ? apostrophGroupNum : apostrophGroupNum + 1;
-			target = target.replace("${" + params.get(paramNum) + "}", matcher.group(groupNum).replace("''", "'"));
+			String quote = isApostrophGroup ? "'" : "\"";
+ 			target = target.replace("${" + params.get(paramNum) + "}", matcher.group(groupNum).replace(quote + quote, quote));
 		}
 		return target;
 	}
