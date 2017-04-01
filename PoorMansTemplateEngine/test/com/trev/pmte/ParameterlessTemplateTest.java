@@ -40,6 +40,30 @@ public class ParameterlessTemplateTest {
 	}
 
 	@Test
+	public void testOneTemplateTrailingSpace() {
+		// GIVEN
+		String src = "asdf\n${TemplateCall }\nghij";
+		
+		// WHEN
+		String target = engine.applyTemplates(src);
+		
+		// THEN
+		assertEquals(target, "asdf\n<TemplateTarget>\nghij");
+	}
+
+	@Test
+	public void testOneTemplateLeadingSpace() {
+		// GIVEN
+		String src = "asdf\n${ TemplateCall }\nghij";
+		
+		// WHEN
+		String target = engine.applyTemplates(src);
+		
+		// THEN
+		assertEquals(target, "asdf\n<TemplateTarget>\nghij");
+	}
+
+	@Test
 	public void testTemplateTwice() {
 		// GIVEN
 		String src = "asdf\n${TemplateCall}\nghij\n${TemplateCall}\nasdf";

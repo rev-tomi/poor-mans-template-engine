@@ -29,6 +29,20 @@ public class TemplateWithParamsTest {
 	}
 	
 	@Test
+	public void testTrailingSpace() {
+		// GIVEN
+		engine.addTemplate("TemplateCall", "<Template Target \"${param}\">", "param");
+		String src = "asdf${TemplateCall 'kakukk' }ghij";
+		
+		// WHEN
+		String target = engine.applyTemplates(src);
+		
+		// THEN
+		System.out.println(target);
+		assertEquals("asdf<Template Target \"kakukk\">ghij", target);
+	}
+	
+	@Test
 	public void testSingleParamTwoOccurrencesTemplace() {
 		// GIVEN
 		engine.addTemplate("TemplateCall", "<Template Target \"${param}\" ${param}>", "param");

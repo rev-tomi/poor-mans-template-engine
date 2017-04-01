@@ -17,13 +17,13 @@ class TemplateDefinition {
 	}
 	
 	Pattern createPattern(String pattern, int paramsLength) {
-		StringBuilder patternSrc = new StringBuilder("\\$\\{" + pattern);
+		StringBuilder patternSrc = new StringBuilder("\\$\\{\\s*" + pattern);
 		for (int i = 0; i < paramsLength; i++) {
 			patternSrc.append("\\s+(?:"). // spaces, then an alternative
 				append("'((?>[^']+|'')*)'|"). // 1st alternative: apostrophe is the delimiter
 				append("\"((?>[^\"]+|\"\")*)\")"); // 2nd alternative: quote is the delimiter
 		}
-		patternSrc.append("\\}");
+		patternSrc.append("\\s*\\}");
 		return Pattern.compile(patternSrc.toString());
 	}
 
