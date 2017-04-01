@@ -10,21 +10,10 @@ class TemplateDefinition {
 	private final String target;
 	private final String[] params;
 	
-	public TemplateDefinition(String pattern, String target, String... params) {
-		this.pattern = createPattern(pattern, params.length);
+	public TemplateDefinition(Pattern pattern, String target, String... params) {
+		this.pattern = pattern;
 		this.target = target;
 		this.params = params;
-	}
-	
-	Pattern createPattern(String pattern, int paramsLength) {
-		StringBuilder patternSrc = new StringBuilder("\\$\\{\\s*" + pattern);
-		for (int i = 0; i < paramsLength; i++) {
-			patternSrc.append("\\s+(?:"). // spaces, then an alternative
-				append("'((?>[^']+|'')*)'|"). // 1st alternative: apostrophe is the delimiter
-				append("\"((?>[^\"]+|\"\")*)\")"); // 2nd alternative: quote is the delimiter
-		}
-		patternSrc.append("\\s*\\}");
-		return Pattern.compile(patternSrc.toString());
 	}
 
 	public Pattern getPattern() {

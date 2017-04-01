@@ -38,7 +38,6 @@ public class TemplateWithParamsTest {
 		String target = engine.applyTemplates(src);
 		
 		// THEN
-		System.out.println(target);
 		assertEquals("asdf<Template Target \"kakukk\">ghij", target);
 	}
 	
